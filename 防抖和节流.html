@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="debounce">防抖</button>
+
+  <button id="throttle">节流</button>
+  <script>
+      //防抖
+      function debounce(fn, wait) {
+          let task = null;
+          return function () {
+              if (task) {
+                  console.log('清除计时器');
+                  clearTimeout(task);
+              }
+              task = setTimeout(() => {
+                  console.log('设置了计时器');
+                  fn.apply(this, arguments);
+              }, wait);
+          }
+      }
+      function fun1() {
+          console.log('btn1的函数执行了');
+      }
+      var btn1 = document.getElementById('debounce');
+      btn1.addEventListener("click", debounce(fun1, 2000))
+
+
+      // 节流
+      function throttle(fn, wait) {
+          let task = null;
+          return function () {
+              if (!task) {
+                  console.log('设置了task定时器');
+                  task = setTimeout(() => {
+                      task = null;
+                      fn.apply(this, arguments);
+                  }, wait);
+              }
+          }
+      }
+
+      function fun2(){
+          console.log('btn2的函数执行了');
+      }
+      var btn2 = document.getElementById('throttle');
+      btn2.addEventListener('click',throttle(fun2,2000))
+  </script>
+</body>
+<script>
+
+</script>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- <button id="test">防抖</button> -->
+
+</body>
+<script>
+  // function test(fn,wait){
+  //   let task = null
+  //   return function(){
+  //     if(task){
+  //       clearTimeout(task)
+  //     }
+  //      task = setTimeout(()=>{
+  //       fn.apply(this,arguments)
+  //     },wait)
+  //   }
+  // }
+  // function fn1(){
+  //   console.log("触发函数了");
+  // }
+  // var list = document.getElementById('test')
+  // list.addEventListener('click',test(fn1,2000))
+  // new Promise((res, reject) => {
+  //   // res()
+  //   reject()
+  // }).then(() => {
+  //   console.log(1)
+  // }).then(() => {
+  //   console.log(2)
+  // }).catch(() => {
+  //   console.log(3)
+  // })
+  // for(var i=0;i<5;i++){
+  //   setTimeout(()=>{
+  //     console.log(i);
+  //   },0)
+  // }
+
+
+
+
+  console.log('1')
+  setTimeout(function () {
+    console.log('2');
+    process.nextlick(function () {
+      console.log('3');
+    })
+    new Promise(function (resolve) {
+      console.log('4');
+      resolve();
+    }).then(function () {
+      console.log("5")
+    })
+  })
+      process.nextTick(function () {
+        console.log("6")
+      })
+      new Promise(function (resolve) {
+        console.log('7');
+        resolve()
+      }).then(function () {
+        console.log('8')
+      })
+        setTimeout(function () {
+          console.log("9")
+          process.nextTick(function () {
+            console.log('10');
+          })
+          new Promise(function (resolve) {
+            console.log("11")
+            resolve()
+          }).then(function () {
+            console.log("12")
+          })
+        })
+
+</script>
+
+</html>
